@@ -1,0 +1,36 @@
+
+{% block content %}
+{% load static %}
+
+<head>
+    <title>로그인</title>
+    <link href="{% static 'css/account.css' %}" rel="stylesheet">
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static 'css/mains.css' %}" />
+</head>
+
+<body>
+
+    <div class="container my-3">
+        <form method="POST" class="loginForm" action=''> <!--action='login' 하면 url 매팅 실패-->
+            {% csrf_token %}
+            <h2>Login</h2>
+            <div class="idForm">
+                <input type="text" class="pw" name="username" id="username" placeholder="ID">
+                <span class="error_next_box"></span>
+            </div>
+            <div class="passForm">
+                <input type="password" class="pw" name="password" id="password" placeholder="PW">
+                <span class="error_next_box"></span>
+            </div>
+            <!--로그인 실패 시 아래에 텍스트를 띄워주는데 이거 한번 실패하면 계속 남아있음-->
+            {% if error %}
+            <div style="color:red">{{ error }}</div>
+            {% endif %}
+            <button type="submit" class="btn">로그인</button>
+            <div>계정이 없으신가요? <a href='signup'>회원가입</a> 하세요.</div>
+        </form>
+    </div>
+    <script src="{% static 'js/login.js' %}"></script>
+</body>
+{% endblock %}

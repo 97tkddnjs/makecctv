@@ -1,0 +1,50 @@
+{% block content %}
+{% load static %}
+<head>
+    <title>회원가입</title>
+    <link href="{% static 'css/account.css' %}" rel="stylesheet">
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static 'css/mains.css' %}" />
+</head>
+
+<body>
+
+<div class="container my-3">
+    <form method="POST" class="registerForm">
+        <br><br>
+        {% csrf_token %}
+        <h2>Sign up</h2>
+        <div class="idForm">
+            <label for="username">아이디를 입력하세요.</label>
+            <input type="text" class="id" name="username" id="username" placeholder="Enter the ID to join.">
+            <span class="error_next_box"></span>
+        </div>
+        <div class="idForm">
+            <label for="password">비밀번호를 입력하세요.</label>
+            <input type="password" class="id" name="password" id="password" placeholder="Please enter a password.">
+            <span id="alertTxt">사용불가</span>
+            <img src="/static/img/m_icon_pass.png" id="pswd1_img1" class="pswdImg">
+            <span class="error_next_box"></span>
+        </div>
+        <div class="idForm">
+            <label for="confirm">비밀번호를 다시한번 입력하세요.</label>
+            <input type="password" class="id" name="confirm" id="confirm" placeholder="Please re-enter your password.">
+            <img src="/static/img/m_icon_check_disable.png" id="pswd2_img1" class="pswdImg">
+            <span class="error_next_box"></span>
+        </div>
+        <div class="idForm">
+            <label for="email">이메일을 입력하세요.</label>
+            <input type="text" class="id" name="email" id="email" placeholder="Please enter your email.">
+            <span class="error_next_box"></span>
+        </div>
+        <div class="bottomText">
+            <button type="submit" class="btn">생성하기</button>
+            <div>계정이 있으신가요? <a href="{% url 'login' %}">로그인</a> 하세요.</div>
+            <br><br><br><br>
+        </div>
+    </form>
+</div>
+<script src="{% static 'signup.js' %}"></script>
+
+</body>
+{% endblock %}
