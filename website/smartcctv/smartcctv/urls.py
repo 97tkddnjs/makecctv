@@ -21,4 +21,3 @@ urlpatterns = [
     path('',include("singlePage.urls")),
     path('account/', include("account.urls")),
 ]
-

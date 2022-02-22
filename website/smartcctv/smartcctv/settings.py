@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nhc0pyy1qid670#i#(ed*fvchhi$%du*#+2%8re%d_qkk^_7y1'
+SECRET_KEY = 'django-insecure-2cvlft5x^f7kah(l1z(y=56rh&ci#85p8)og**oy)@fuc5bmtz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,16 +77,11 @@ WSGI_APPLICATION = 'smartcctv.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-	'default': {
-    	'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'smartcctv',
-        'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': 'localhost',
-        'PORT': '3306',
-     }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
-
 
 
 # Password validation
@@ -127,7 +122,6 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR/'static',
 ]
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
