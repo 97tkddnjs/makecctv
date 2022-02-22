@@ -1,15 +1,25 @@
+'''
+참고 url들
+https://pysource.com/2019/06/27/yolo-object-detection-using-opencv-with-python/
+https://m.blog.naver.com/tommybee/221653452583
+
+'''
+
 import cv2
 import numpy as np
 
-def yolo(frame, size, score_threshold, nms_threshold):
+def yolo(frame, size, score_threshold, nms_threshold):  
     # YOLO 네트워크 불러오기
     net = cv2.dnn.readNet(f"yolov4.weights", "yolov4.cfg")
     layer_names = net.getLayerNames()
-    #print(layer_names)
+    print(layer_names)
     # for i in net.getUnconnectedOutLayers() :
-    #     print(i)
-    output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
+    # yolo 관련 예시 파일들은 i[0]으로 하지만 직접 찍어본 봐 i로 하는 게 맞음
+    #https://www.codespeedy.com/yolo-object-detection-from-image-with-opencv-and-python/
 
+    # ㅛ
+    output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
+    print(output_layers)
     # 클래스의 갯수만큼 랜덤 RGB 배열을 생성
     colors = np.random.uniform(0, 255, size=(len(classes), 3))
 
@@ -29,7 +39,7 @@ def yolo(frame, size, score_threshold, nms_threshold):
     class_ids = []
     confidences = []
     boxes = []
-
+    # print(outs)
     for out in outs:
         for detection in out:
             scores = detection[5:]
@@ -96,15 +106,20 @@ classes = ["person", "bicycle", "car", "motorcycle",
            "book", "clock", "vase", "scissors", "teddy bear", "hair drier", "toothbrush"]
 
 # 이미지 경로
-hospital = "hospital.jpg"
+path ="image/"
+image_file = path+"fall.png"
 
 # 이미지 읽어오기
-frame = cv2.imread(hospital)
+frame = cv2.imread(image_file)
 
 # 입력 사이즈 리스트 (Yolo 에서 사용되는 네크워크 입력 이미지 사이즈)
 size_list = [320, 416, 608]
+# 320×320 it’s small so less accuracy but better speed
+# 609×609 it’s bigger so high accuracy and slow speed
+# 416×416 it’s in the middle and you get a bit of both.
 
-frame = yolo(frame=frame, size=size_list[2], score_threshold=0.4, nms_threshold=0.4)
+
+frame = yolo(frame=frame, size=size_list[1], score_threshold=0.4, nms_threshold=0.4)
 cv2.imshow("Output_Yolo", frame)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
